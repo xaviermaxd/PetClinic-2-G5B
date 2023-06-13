@@ -1,6 +1,7 @@
 package com.tecsup.petclinic.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -38,20 +39,30 @@ public class VetServiceImpl implements VetService{
 
 	@Override
 	public Vet findById(Integer id) throws VetNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Vet> vet = vetRepository.findById(id);
+
+		if ( !vet.isPresent())
+			throw new VetNotFoundException("Record not found...!");
+			
+		return vet.get();
 	}
 
 	@Override
 	public List<Vet> findByFirstName(String first_name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vet> vets = vetRepository.findByLastName(first_name);
+
+		vets.stream().forEach(vet -> log.info("" + vet));
+
+		return vets;
 	}
 
 	@Override
 	public List<Vet> findByLastName(String last_name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vet> vets = vetRepository.findByLastName(last_name);
+
+		vets.stream().forEach(vet -> log.info("" + vet));
+
+		return vets;
 	}
 
 	@Override
