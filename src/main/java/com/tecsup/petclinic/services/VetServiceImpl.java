@@ -3,6 +3,7 @@ package com.tecsup.petclinic.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tecsup.petclinic.entities.Vet;
@@ -15,11 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class VetServiceImpl implements VetService{
 	
+	@Autowired
 	VetRepository vetRepository;
 
-	public VetServiceImpl (VetRepository VetRepository) {
-	this. vetRepository = VetRepository;
-}
 	
 	public Vet create(Vet vet) {
 		return vetRepository.save(vet);
